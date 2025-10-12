@@ -115,3 +115,13 @@ def system_cooling():
     boton_home = driver.find_element(By.XPATH, "//div[@id='coolingPage']//a[@class='home_link']")
     boton_home.click()
 
+def power_amps():
+    boton_power_amps = driver.find_element(By.XPATH, "//a[@id='menuBtn2']")
+    boton_power_amps.click()
+    boton_summary_meters = driver.find_element(By.XPATH, "//a[@id='menuBtn2']")
+    boton_summary_meters.click()
+
+    #Guardado de lecturas
+    pa_t = []
+    pa_t.extend(obtener_textos(By.CLASS_NAME, "fax_powerampmeters_rowtext"))
+    print(pa_t)
