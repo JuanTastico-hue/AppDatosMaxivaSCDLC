@@ -53,3 +53,44 @@ def system_meters():
 
     boton_home = driver.find_element(By.XPATH, "//div[@id='sysmetersPage']//a[@class='home_link']")
     boton_home.click()
+
+def drive_chain():
+    #Listoooooo
+    exitador = 'B'
+    boton_drive_chain = driver.find_element(By.XPATH, "//a[@id='menuBtn1']")
+    boton_drive_chain.click()
+    time.sleep(4)
+    boton_drive_summary = driver.find_element(By.XPATH, "//a[@id='menuBtn1']")
+    boton_drive_summary.click()
+
+    drive_chain_datos = []
+
+    '''
+    --->Colocar botón en el cual se pueda elegir el exitador activo
+        datos guardados:
+            Module RF Out
+            Module Input
+            Input Voltage
+            Total Current
+    '''
+    #ExcitadorA
+    ids=[]
+    if exitador == 'A':
+        ids = ['xt_dca_mod_rf_out',
+               'xt_dca_mod_dr',
+               'xt_dca_inp_volt',
+               'xt_dca_tot_curr']
+
+    #ExcitadorB
+    elif exitador == 'B':
+        ids = ['xt_dcb_mod_rf_out',
+                 'xt_dcb_mod_dr',
+                 'xt_dcb_inp_volt',
+                 'xt_dcb_tot_curr']
+
+    drive_chain_datos.extend([obtener_texto(By.ID, id_) for id_ in ids])
+
+    print(drive_chain_datos)
+
+    boton_home = driver.find_element(By.XPATH, "//div[@id='dcsumPage']//a[@class='home_link']")
+    boton_home.click()
