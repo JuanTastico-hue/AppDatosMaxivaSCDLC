@@ -18,3 +18,7 @@ import time
 def obtener_texto(by, selector, timeout=10):
     etiqueta = WebDriverWait(driver, timeout).until(ec.visibility_of_element_located((by, selector)))
     return etiqueta.text
+
+def obtener_textos(by, selector, timeout=50):
+    clases = WebDriverWait(driver, timeout).until(ec.presence_of_all_elements_located((by, selector)))
+    return [elemento.text for elemento in clases]
