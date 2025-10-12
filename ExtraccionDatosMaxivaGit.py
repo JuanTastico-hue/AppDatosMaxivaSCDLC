@@ -14,3 +14,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 import time
+
+def obtener_texto(by, selector, timeout=10):
+    etiqueta = WebDriverWait(driver, timeout).until(ec.visibility_of_element_located((by, selector)))
+    return etiqueta.text
