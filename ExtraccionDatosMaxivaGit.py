@@ -125,3 +125,18 @@ def power_amps():
     pa_t = []
     pa_t.extend(obtener_textos(By.CLASS_NAME, "fax_powerampmeters_rowtext"))
     print(pa_t)
+
+#service = Service(ChromeDriverManager().install())
+service = Service(r'D:/Proyectos/Rep Tuxtla/Drivers/chromedriver.exe')
+
+'''Acá poner el código para cambiar la ip y conectarse a red especifica'''
+
+driver = webdriver.Chrome(service=service)
+driver.maximize_window()
+driver.get("http://110.10.10.17/xt/html/index.html")
+
+time.sleep(4)
+
+power_amps()
+
+driver.quit()
