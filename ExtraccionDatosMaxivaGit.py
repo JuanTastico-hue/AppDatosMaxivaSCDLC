@@ -22,3 +22,34 @@ def obtener_texto(by, selector, timeout=10):
 def obtener_textos(by, selector, timeout=50):
     clases = WebDriverWait(driver, timeout).until(ec.presence_of_all_elements_located((by, selector)))
     return [elemento.text for elemento in clases]
+
+def system_meters():
+    #Listoooooo
+    boton_system = driver.find_element(By.XPATH, "//a[@id='menuBtn5']")
+    boton_system.click()
+    time.sleep(4)
+    boton_meters = driver.find_element(By.XPATH, "//a[@id='menuBtn2']")
+    boton_meters.click()
+
+    system_meters_datos= []
+    '''
+        datos guardados:
+            Power Ctrl Ref
+            APC Reference
+            APC Output
+            Foldback Level
+            Fordward Sample
+    '''
+
+    ids = ['fax_sysmeter_pwrctrlref',
+           'fax_sysmeter_apcref',
+           'xt_sysmeter_apcoutput',
+           'fax_sysmeter_foldback',
+           'fax_sysmeter_fwdsmp']
+
+    system_meters_datos.extend([obtener_texto(By.ID, id_) for id_ in ids])
+
+    print(system_meters_datos)
+
+    boton_home = driver.find_element(By.XPATH, "//div[@id='sysmetersPage']//a[@class='home_link']")
+    boton_home.click()
