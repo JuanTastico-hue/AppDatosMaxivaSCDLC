@@ -94,3 +94,24 @@ def drive_chain():
 
     boton_home = driver.find_element(By.XPATH, "//div[@id='dcsumPage']//a[@class='home_link']")
     boton_home.click()
+
+def system_cooling():
+    #Listoooooo
+    boton_cooling = driver.find_element(By.ID, "fax_home_cooling")
+    boton_cooling.click()
+
+    cooling_datos = []
+
+    ids = ['xt_pbcooling_itempc',
+           'xt_pbcooling_flow1',
+           'xt_pbcooling_inpress1',
+           'xt_pbcooling_outpress1',
+           'xt_pbcooling_ftempc']
+
+    cooling_datos.extend([obtener_texto(By.ID, id_) for id_ in ids])
+
+    print(cooling_datos)
+
+    boton_home = driver.find_element(By.XPATH, "//div[@id='coolingPage']//a[@class='home_link']")
+    boton_home.click()
+
