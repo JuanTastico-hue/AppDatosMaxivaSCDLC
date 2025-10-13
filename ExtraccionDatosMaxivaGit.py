@@ -130,6 +130,9 @@ def power_amps():
 service = Service(r'D:/Proyectos/Rep Tuxtla/Drivers/chromedriver.exe')
 
 '''Acá poner el código para cambiar la ip y conectarse a red especifica'''
+'''También tener en cuenta la programación para actualizar el driver automaticamente'''
+'''Primero se debe de conectar a internet para actualizar el driver y luego conectarse
+manualmente al con la modificación de la ip y mascara de red del transmisor'''
 
 driver = webdriver.Chrome(service=service)
 driver.maximize_window()
