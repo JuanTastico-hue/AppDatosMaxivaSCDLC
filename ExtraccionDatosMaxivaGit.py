@@ -9,7 +9,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
@@ -123,6 +123,7 @@ def recoleccion_datos():
 
     pa_t = []
     pa_t.extend(obtener_textos(By.CLASS_NAME, "fax_powerampmeters_rowtext"))
+    pa_t = pa_t[0:30]
     print(pa_t)
 
 #service = Service(ChromeDriverManager().install())
