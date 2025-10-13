@@ -134,7 +134,7 @@ manualmente al con la modificación de la ip y mascara de red del transmisor'''
 
 driver = webdriver.Chrome(service=service)
 driver.maximize_window()
-driver.get("http://110.10.10.16/xt/html/index.html")
+driver.get("http://110.10.10.17/xt/html/index.html")
 
 time.sleep(4)
 
