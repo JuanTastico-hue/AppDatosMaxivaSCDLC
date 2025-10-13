@@ -23,7 +23,7 @@ def obtener_textos(by, selector, timeout=50):
     clases = WebDriverWait(driver, timeout).until(ec.presence_of_all_elements_located((by, selector)))
     return [elemento.text for elemento in clases]
 
-def system_meters():
+def recoleccion_datos():
     #Listoooooo
     boton_system = driver.find_element(By.XPATH, "//a[@id='menuBtn5']")
     boton_system.click()
@@ -54,7 +54,6 @@ def system_meters():
     boton_home = driver.find_element(By.XPATH, "//div[@id='sysmetersPage']//a[@class='home_link']")
     boton_home.click()
 
-def drive_chain():
     #Listoooooo
     exitador = 'B'
     boton_drive_chain = driver.find_element(By.XPATH, "//a[@id='menuBtn1']")
@@ -95,7 +94,6 @@ def drive_chain():
     boton_home = driver.find_element(By.XPATH, "//div[@id='dcsumPage']//a[@class='home_link']")
     boton_home.click()
 
-def system_cooling():
     #Listoooooo
     boton_cooling = driver.find_element(By.ID, "fax_home_cooling")
     boton_cooling.click()
@@ -115,7 +113,6 @@ def system_cooling():
     boton_home = driver.find_element(By.XPATH, "//div[@id='coolingPage']//a[@class='home_link']")
     boton_home.click()
 
-def power_amps():
     boton_power_amps = driver.find_element(By.XPATH, "//a[@id='menuBtn2']")
     boton_power_amps.click()
     boton_summary_meters = driver.find_element(By.XPATH, "//a[@id='menuBtn2']")
@@ -137,6 +134,6 @@ driver.get("http://110.10.10.16/xt/html/index.html")
 
 time.sleep(4)
 
-power_amps()
+recoleccion_datos()
 
 driver.quit()
