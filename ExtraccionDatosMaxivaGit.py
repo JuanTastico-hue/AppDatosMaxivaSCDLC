@@ -55,7 +55,7 @@ def recoleccion_datos():
     boton_home.click()
 
     #DRIVE CHAIN
-    exitador = 'B'
+    exitador = 'A'
     boton_drive_chain = driver.find_element(By.XPATH, "//a[@id='menuBtn1']")
     boton_drive_chain.click()
     time.sleep(4)
@@ -125,8 +125,8 @@ def recoleccion_datos():
     pa_t.extend(obtener_textos(By.CLASS_NAME, "fax_powerampmeters_rowtext"))
     print(pa_t)
 
-service = Service(ChromeDriverManager().install())
-#service = Service(r'D:/Proyectos/Rep Tuxtla/Drivers/chromedriver.exe')
+#service = Service(ChromeDriverManager().install())
+service = Service(r'D:/Proyectos/Rep Tuxtla/Drivers/chromedriver.exe')
 
 '''Acá poner el código para cambiar la ip y conectarse a red especifica'''
 '''También tener en cuenta la programación para actualizar el driver automaticamente'''
