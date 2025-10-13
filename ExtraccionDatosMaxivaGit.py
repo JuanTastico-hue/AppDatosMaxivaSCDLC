@@ -24,7 +24,7 @@ def obtener_textos(by, selector, timeout=50):
     return [elemento.text for elemento in clases]
 
 def recoleccion_datos():
-    #system meters
+    #SYSTEM METERS
     boton_system = driver.find_element(By.XPATH, "//a[@id='menuBtn5']")
     boton_system.click()
     time.sleep(4)
@@ -54,7 +54,7 @@ def recoleccion_datos():
     boton_home = driver.find_element(By.XPATH, "//div[@id='sysmetersPage']//a[@class='home_link']")
     boton_home.click()
 
-    #drive chain
+    #DRIVE CHAIN
     exitador = 'B'
     boton_drive_chain = driver.find_element(By.XPATH, "//a[@id='menuBtn1']")
     boton_drive_chain.click()
@@ -72,7 +72,7 @@ def recoleccion_datos():
             Input Voltage
             Total Current
     '''
-    #ExcitadorA
+            #ExcitadorA
     ids=[]
     if exitador == 'A':
         ids = ['xt_dca_mod_rf_out',
@@ -80,7 +80,7 @@ def recoleccion_datos():
                'xt_dca_inp_volt',
                'xt_dca_tot_curr']
 
-    #ExcitadorB
+            #ExcitadorB
     elif exitador == 'B':
         ids = ['xt_dcb_mod_rf_out',
                  'xt_dcb_mod_dr',
@@ -94,7 +94,7 @@ def recoleccion_datos():
     boton_home = driver.find_element(By.XPATH, "//div[@id='dcsumPage']//a[@class='home_link']")
     boton_home.click()
 
-    #system cooling
+    #SYSTEM METERS
     boton_cooling = driver.find_element(By.ID, "fax_home_cooling")
     boton_cooling.click()
 
@@ -110,7 +110,7 @@ def recoleccion_datos():
 
     print(cooling_datos)
 
-    #power amps
+    #POWER AMPS
     boton_home = driver.find_element(By.XPATH, "//div[@id='coolingPage']//a[@class='home_link']")
     boton_home.click()
 
@@ -119,7 +119,7 @@ def recoleccion_datos():
     boton_summary_meters = driver.find_element(By.XPATH, "//a[@id='menuBtn2']")
     boton_summary_meters.click()
 
-    #Guardado de lecturas
+            #Guardado de lecturas
     pa_t = []
     pa_t.extend(obtener_textos(By.CLASS_NAME, "fax_powerampmeters_rowtext"))
     print(pa_t)
