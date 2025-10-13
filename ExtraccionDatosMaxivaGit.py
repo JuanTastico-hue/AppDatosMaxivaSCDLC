@@ -120,6 +120,7 @@ def recoleccion_datos():
     boton_summary_meters.click()
 
             #Guardado de lecturas de los power amps
+
     pa_t = []
     pa_t.extend(obtener_textos(By.CLASS_NAME, "fax_powerampmeters_rowtext"))
     print(pa_t)
