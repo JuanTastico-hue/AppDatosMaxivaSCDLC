@@ -24,7 +24,7 @@ def obtener_textos(by, selector, timeout=50):
     return [elemento.text for elemento in clases]
 
 def recoleccion_datos():
-    #Listoooooo
+    #system meters
     boton_system = driver.find_element(By.XPATH, "//a[@id='menuBtn5']")
     boton_system.click()
     time.sleep(4)
@@ -54,7 +54,7 @@ def recoleccion_datos():
     boton_home = driver.find_element(By.XPATH, "//div[@id='sysmetersPage']//a[@class='home_link']")
     boton_home.click()
 
-    #Listoooooo
+    #drive chain
     exitador = 'B'
     boton_drive_chain = driver.find_element(By.XPATH, "//a[@id='menuBtn1']")
     boton_drive_chain.click()
@@ -94,7 +94,7 @@ def recoleccion_datos():
     boton_home = driver.find_element(By.XPATH, "//div[@id='dcsumPage']//a[@class='home_link']")
     boton_home.click()
 
-    #Listoooooo
+    #system cooling
     boton_cooling = driver.find_element(By.ID, "fax_home_cooling")
     boton_cooling.click()
 
@@ -110,6 +110,7 @@ def recoleccion_datos():
 
     print(cooling_datos)
 
+    #power amps
     boton_home = driver.find_element(By.XPATH, "//div[@id='coolingPage']//a[@class='home_link']")
     boton_home.click()
 
