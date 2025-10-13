@@ -9,7 +9,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-#from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
@@ -125,8 +125,8 @@ def recoleccion_datos():
     pa_t.extend(obtener_textos(By.CLASS_NAME, "fax_powerampmeters_rowtext"))
     print(pa_t)
 
-#service = Service(ChromeDriverManager().install())
-service = Service(r'D:/Proyectos/Rep Tuxtla/Drivers/chromedriver.exe')
+service = Service(ChromeDriverManager().install())
+#service = Service(r'D:/Proyectos/Rep Tuxtla/Drivers/chromedriver.exe')
 
 '''Acá poner el código para cambiar la ip y conectarse a red especifica'''
 '''También tener en cuenta la programación para actualizar el driver automaticamente'''
