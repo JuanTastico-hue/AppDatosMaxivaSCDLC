@@ -23,8 +23,8 @@ def obtener_textos(by, selector, timeout=50):
     clases = WebDriverWait(driver, timeout).until(ec.presence_of_all_elements_located((by, selector)))
     return [elemento.text for elemento in clases]
 
-def system_meters():
-    #Listoooooo
+def recoleccion_datos():
+    #SYSTEM METERS
     boton_system = driver.find_element(By.XPATH, "//a[@id='menuBtn5']")
     boton_system.click()
     time.sleep(4)
@@ -54,8 +54,7 @@ def system_meters():
     boton_home = driver.find_element(By.XPATH, "//div[@id='sysmetersPage']//a[@class='home_link']")
     boton_home.click()
 
-def drive_chain():
-    #Listoooooo
+    #DRIVE CHAIN
     exitador = 'B'
     boton_drive_chain = driver.find_element(By.XPATH, "//a[@id='menuBtn1']")
     boton_drive_chain.click()
@@ -73,7 +72,7 @@ def drive_chain():
             Input Voltage
             Total Current
     '''
-    #ExcitadorA
+            #ExcitadorA
     ids=[]
     if exitador == 'A':
         ids = ['xt_dca_mod_rf_out',
@@ -81,7 +80,7 @@ def drive_chain():
                'xt_dca_inp_volt',
                'xt_dca_tot_curr']
 
-    #ExcitadorB
+            #ExcitadorB
     elif exitador == 'B':
         ids = ['xt_dcb_mod_rf_out',
                  'xt_dcb_mod_dr',
@@ -95,8 +94,7 @@ def drive_chain():
     boton_home = driver.find_element(By.XPATH, "//div[@id='dcsumPage']//a[@class='home_link']")
     boton_home.click()
 
-def system_cooling():
-    #Listoooooo
+    #SYSTEM METERS
     boton_cooling = driver.find_element(By.ID, "fax_home_cooling")
     boton_cooling.click()
 
@@ -112,16 +110,16 @@ def system_cooling():
 
     print(cooling_datos)
 
+    #POWER AMPS
     boton_home = driver.find_element(By.XPATH, "//div[@id='coolingPage']//a[@class='home_link']")
     boton_home.click()
 
-def power_amps():
     boton_power_amps = driver.find_element(By.XPATH, "//a[@id='menuBtn2']")
     boton_power_amps.click()
     boton_summary_meters = driver.find_element(By.XPATH, "//a[@id='menuBtn2']")
     boton_summary_meters.click()
 
-    #Guardado de lecturas
+            #Guardado de lecturas
     pa_t = []
     pa_t.extend(obtener_textos(By.CLASS_NAME, "fax_powerampmeters_rowtext"))
     print(pa_t)
@@ -140,6 +138,6 @@ driver.get("http://110.10.10.16/xt/html/index.html")
 
 time.sleep(4)
 
-power_amps()
+recoleccion_datos()
 
 driver.quit()
