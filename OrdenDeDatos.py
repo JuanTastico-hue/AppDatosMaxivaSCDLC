@@ -27,23 +27,20 @@ system_meters_list = [
     'APC Reference',
     'APC Output',
     'Foldback Level',
-    'Fordward Sample'
-    ]
+    'Fordward Sample']
 
 drive_chain_list = [
     'Module RF Out',
     'Module Input',
     'Input Voltage',
-    'Total Current'
-    ]
+    'Total Current']
 
 system_cooling_list = [
     'Coolant Temp',
     'Flow Rate',
     'Inlet Press',
     'Oulet Press',
-    'Air Temp-Front'
-    ]
+    'Air Temp-Front']
 #
 #    POWER AMPS:
 #        #####   PWR OUT%    VOLTS   AMPS    TEMP°C
@@ -57,6 +54,41 @@ system_cooling_list = [
 grupos = [
     ('System meters', system_meters_tx16, system_meters_tx17,['Canal 16', 'Canal 17']),
     ('Drive Chain', drive_chain_tx_16, drive_chain_tx_17, ['Canal 16', 'Canal 17']),
-    ('System Cooling', system_cooling_tx16, system_cooling_tx17, ['Canal 16', 'Canal 17'])
+    ('System Cooling', system_cooling_tx16, system_cooling_tx17, ['Canal 16', 'Canal 17']),
+    ('Power Amps', power_amps_tx16, power_amps_tx17, ['Canal 16', 'Canal 17'])]
 
-]
+#Creacion de PDF
+pdf = SimpleDocTemplate('reporte_mediciones.pdf', pagesize=letter)
+estilos = getSampleStyleSheet()
+contenido = []
+
+for titulo, lista1, lista2, headers in grupos:
+    #Agregar titulo
+    contenido.append(Paragraph(f'<b>{titulo}</b>', estilos['Heading2']))
+    contenido.append(Spacer(1, 8))
+
+    #crear tabla
+    data = [headers]
+    for i in range(len(lista1)):
+        data.append([lista1[i], lista2[i]])
+
+    tabla = Table(data)
+
+    #Estilo de tabla
+    estilo_tabla = TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), colors.gray),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
+        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("BOTTOMPADDING", (0, 0), (-1, 0), 8),
+    ])
+    tabla.setStyle(estilo_tabla)
+
+    #Agregar tabla y espacio
+    contenido.append(tabla)
+    contenido.append(Spacer(1,15))
+
+#Generar PDF
+pdf.build(contenido)
+print("PDF generado correctamente: reporte_mediciones.pdf")
