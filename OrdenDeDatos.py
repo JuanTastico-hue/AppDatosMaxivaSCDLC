@@ -52,25 +52,23 @@ system_cooling_list = [
 #          PA6
 
 grupos = [
-    ('System meters', system_meters_tx16, system_meters_tx17,['Canal 16', 'Canal 17']),
-    ('Drive Chain', drive_chain_tx_16, drive_chain_tx_17, ['Canal 16', 'Canal 17']),
-    ('System Cooling', system_cooling_tx16, system_cooling_tx17, ['Canal 16', 'Canal 17']),
-    ('Power Amps', power_amps_tx16, power_amps_tx17, ['Canal 16', 'Canal 17'])]
+    (system_meters_list, system_meters_tx16, system_meters_tx17,['System meters','Canal 16', 'Canal 17']),
+    (drive_chain_list, drive_chain_tx_16, drive_chain_tx_17, ['Drive chain','Canal 16', 'Canal 17']),
+    (system_cooling_list, system_cooling_tx16, system_cooling_tx17, ['System cooling','Canal 16', 'Canal 17']),
+    #('Power Amps', power_amps_tx16, power_amps_tx17, ['Canal 16', 'Canal 17'])
+    ]
 
 #Creacion de PDF
 pdf = SimpleDocTemplate('reporte_mediciones.pdf', pagesize=letter)
 estilos = getSampleStyleSheet()
 contenido = []
 
-for titulo, lista1, lista2, headers in grupos:
-    #Agregar titulo
-    contenido.append(Paragraph(f'<b>{titulo}</b>', estilos['Heading2']))
-    contenido.append(Spacer(1, 8))
+for lista1, lista2, lista3,headers in grupos:
 
     #crear tabla
     data = [headers]
     for i in range(len(lista1)):
-        data.append([lista1[i], lista2[i]])
+        data.append([lista1[i], lista2[i], lista3[i]])
 
     tabla = Table(data)
 
