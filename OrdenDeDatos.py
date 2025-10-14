@@ -1,31 +1,7 @@
-#    SYSTEM METERS:
-#        Power Ctrl Ref
-#        APC Reference
-#        APC Output
-#        Foldback Level
-#        Fordward Sample
-#
-#    DRIVE CHAIN:
-#        Module RF Out
-#        Module Input
-#        Input Voltage
-#        Total Current
-#
-#    SYSTEM COOLING:
-#        Coolant Temp
-#        Flow Rate
-#        Inlet Press
-#        Oulet Press
-#        Air Temp-Front
-#
-#    POWER AMPS:
-#        #####   PWR OUT%    VOLTS   AMPS    TEMP°C
-#          PA1
-#          PA2
-#         PA3
-#          PA4
-#          PA5
-#          PA6
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
 
 system_meters_tx16 = ['3.510 V', '3.509 V', '3.385 V', '0.267 V', '3.502 V']
 system_meters_tx17 = ['3.512 V', '3.508 V', '3.380 V', '0.257 V', '3.509 V']
@@ -46,3 +22,41 @@ power_amps_tx17 = ['PA 1:', '99.3 %', '47.5 V', '23.9 A', '40.4 C',
                    'PA 5:', '99.8 %', '47.4 V', '19.4 A', '37.3 C',
                    'PA 6:', '104.7 %', '47.4 V', '20.4 A', '38.2 C']
 
+system_meters_list = [
+    'Power Ctrl Ref',
+    'APC Reference',
+    'APC Output',
+    'Foldback Level',
+    'Fordward Sample'
+    ]
+
+drive_chain_list = [
+    'Module RF Out',
+    'Module Input',
+    'Input Voltage',
+    'Total Current'
+    ]
+
+system_cooling_list = [
+    'Coolant Temp',
+    'Flow Rate',
+    'Inlet Press',
+    'Oulet Press',
+    'Air Temp-Front'
+    ]
+#
+#    POWER AMPS:
+#        #####   PWR OUT%    VOLTS   AMPS    TEMP°C
+#          PA1
+#          PA2
+#          PA3
+#          PA4
+#          PA5
+#          PA6
+
+grupos = [
+    ('System meters', system_meters_tx16, system_meters_tx17,['Canal 16', 'Canal 17']),
+    ('Drive Chain', drive_chain_tx_16, drive_chain_tx_17, ['Canal 16', 'Canal 17']),
+    ('System Cooling', system_cooling_tx16, system_cooling_tx17, ['Canal 16', 'Canal 17'])
+
+]
