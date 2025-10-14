@@ -1,6 +1,6 @@
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 
 system_meters_tx16 = ['3.510 V', '3.509 V', '3.385 V', '0.267 V', '3.502 V']
@@ -21,6 +21,32 @@ power_amps_tx17 = ['PA 1:', '99.3 %', '47.5 V', '23.9 A', '40.4 C',
                    'PA 4:', '100.4 %', '47.6 V', '20.6 A', '38.6 C',
                    'PA 5:', '99.8 %', '47.4 V', '19.4 A', '37.3 C',
                    'PA 6:', '104.7 %', '47.4 V', '20.4 A', '38.2 C']
+
+power_amps_tx16PA = []
+power_amps_tx16V = []
+power_amps_tx16A = []
+power_amps_tx16C = []
+tx16PowerAmpsList = [power_amps_tx16PA,power_amps_tx16V,power_amps_tx16A,power_amps_tx16C]
+
+for cont, lista in enumerate(tx16PowerAmpsList):
+    for idx, valor in enumerate(power_amps_tx16):
+        if (idx - cont) % 5 == 0:
+            lista.append(valor)
+    cont +=1
+    print(lista)
+
+power_amps_tx17PA = []
+power_amps_tx17V = []
+power_amps_tx17A = []
+power_amps_tx17C = []
+tx17PowerAmpsList = [power_amps_tx17PA,power_amps_tx17V,power_amps_tx17A,power_amps_tx17C]
+
+for cont, lista in enumerate(tx17PowerAmpsList):
+    for idx, valor in enumerate(power_amps_tx17):
+        if (idx - cont) % 5 == 0:
+            lista.append(valor)
+    cont +=1
+    print(lista)
 
 system_meters_list = [
     'Power Ctrl Ref',
