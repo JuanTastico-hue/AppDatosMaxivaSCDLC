@@ -85,6 +85,11 @@ grupos1 = [
     (system_cooling_list, system_cooling_tx16, system_cooling_tx17, ['System cooling','Canal 16', 'Canal 17']),
     ]
 
+grupos2 = [
+    (power_amps_tx16PA, power_amps_tx16_power, power_amps_tx16V, power_amps_tx16A, power_amps_tx16C,['','PWR OUT%','VOLTS','AMPS','TEMP °C']),
+    (power_amps_tx17PA, power_amps_tx17_power, power_amps_tx17V, power_amps_tx17A, power_amps_tx17C,['','PWR OUT%','VOLTS','AMPS','TEMP °C'])
+]
+
 #Creacion de PDF
 pdf = SimpleDocTemplate('reporte_mediciones.pdf', pagesize=letter)
 estilos = getSampleStyleSheet()
@@ -101,7 +106,6 @@ estilo_tabla = TableStyle([
 ])
 
 for lista1, lista2, lista3, headers in grupos1:
-
     #crear tabla
     data = [headers]
     for i in range(len(lista1)):
@@ -113,6 +117,19 @@ for lista1, lista2, lista3, headers in grupos1:
     #Agregar tabla y espacio
     contenido.append(tabla)
     contenido.append(Spacer(1,15))
+
+for lista1, lista2, lista3, lista4, lista5, headers in grupos2:
+    #crear tabla
+    data = [headers]
+    for i in range(len(lista1)):
+        data.append([lista1[i], lista2[i], lista3[i], lista4[i], lista5[i]])
+
+    tabla = Table(data)
+    tabla.setStyle(estilo_tabla)
+
+    #agregar tabla y espacio
+    contenido.append(tabla)
+    contenido.append(Spacer(1, 15))
 
 #Generar PDF
 pdf.build(contenido)
