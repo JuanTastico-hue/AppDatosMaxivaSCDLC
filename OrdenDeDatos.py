@@ -23,10 +23,11 @@ power_amps_tx17 = ['PA 1:', '99.3 %', '47.5 V', '23.9 A', '40.4 C',
                    'PA 6:', '104.7 %', '47.4 V', '20.4 A', '38.2 C']
 
 power_amps_tx16PA = []
+power_amps_tx16_power = []
 power_amps_tx16V = []
 power_amps_tx16A = []
 power_amps_tx16C = []
-tx16PowerAmpsList = [power_amps_tx16PA,power_amps_tx16V,power_amps_tx16A,power_amps_tx16C]
+tx16PowerAmpsList = [power_amps_tx16PA,power_amps_tx16_power,power_amps_tx16V,power_amps_tx16A,power_amps_tx16C]
 
 for cont, lista in enumerate(tx16PowerAmpsList):
     for idx, valor in enumerate(power_amps_tx16):
@@ -36,10 +37,11 @@ for cont, lista in enumerate(tx16PowerAmpsList):
     print(lista)
 
 power_amps_tx17PA = []
+power_amps_tx17_power = []
 power_amps_tx17V = []
 power_amps_tx17A = []
 power_amps_tx17C = []
-tx17PowerAmpsList = [power_amps_tx17PA,power_amps_tx17V,power_amps_tx17A,power_amps_tx17C]
+tx17PowerAmpsList = [power_amps_tx17PA,power_amps_tx17_power,power_amps_tx17V,power_amps_tx17A,power_amps_tx17C]
 
 for cont, lista in enumerate(tx17PowerAmpsList):
     for idx, valor in enumerate(power_amps_tx17):
@@ -77,11 +79,10 @@ system_cooling_list = [
 #          PA5
 #          PA6
 
-grupos = [
+grupos1 = [
     (system_meters_list, system_meters_tx16, system_meters_tx17,['System meters','Canal 16', 'Canal 17']),
     (drive_chain_list, drive_chain_tx_16, drive_chain_tx_17, ['Drive chain','Canal 16', 'Canal 17']),
     (system_cooling_list, system_cooling_tx16, system_cooling_tx17, ['System cooling','Canal 16', 'Canal 17']),
-    #('Power Amps', power_amps_tx16, power_amps_tx17, ['Canal 16', 'Canal 17'])
     ]
 
 #Creacion de PDF
@@ -89,7 +90,17 @@ pdf = SimpleDocTemplate('reporte_mediciones.pdf', pagesize=letter)
 estilos = getSampleStyleSheet()
 contenido = []
 
-for lista1, lista2, lista3,headers in grupos:
+# Estilo de tabla
+estilo_tabla = TableStyle([
+    ("BACKGROUND", (0, 0), (-1, 0), colors.gray),
+    ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+    ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+    ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
+    ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+    ("BOTTOMPADDING", (0, 0), (-1, 0), 8),
+])
+
+for lista1, lista2, lista3, headers in grupos1:
 
     #crear tabla
     data = [headers]
@@ -97,16 +108,6 @@ for lista1, lista2, lista3,headers in grupos:
         data.append([lista1[i], lista2[i], lista3[i]])
 
     tabla = Table(data)
-
-    #Estilo de tabla
-    estilo_tabla = TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), colors.gray),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
-        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-        ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ("BOTTOMPADDING", (0, 0), (-1, 0), 8),
-    ])
     tabla.setStyle(estilo_tabla)
 
     #Agregar tabla y espacio
