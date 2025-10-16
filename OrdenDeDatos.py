@@ -86,8 +86,16 @@ grupos1 = [
     ]
 
 grupos2 = [
-    (power_amps_tx16PA, power_amps_tx16_power, power_amps_tx16V, power_amps_tx16A, power_amps_tx16C,['','PWR OUT%','VOLTS','AMPS','TEMP °C']),
-    (power_amps_tx17PA, power_amps_tx17_power, power_amps_tx17V, power_amps_tx17A, power_amps_tx17C,['','PWR OUT%','VOLTS','AMPS','TEMP °C'])
+    (power_amps_tx16PA,
+     power_amps_tx16_power,
+     power_amps_tx16V,
+     power_amps_tx16A,
+     power_amps_tx16C,
+     power_amps_tx17_power,
+     power_amps_tx17V,
+     power_amps_tx17A,
+     power_amps_tx17C,
+     ['Power \nAmps','PWR OUT%','VOLTS','AMPS','TEMP °C','PWR OUT%','VOLTS','AMPS','TEMP °C']),
 ]
 
 #Creacion de PDF
@@ -97,9 +105,9 @@ contenido = []
 
 # Estilo de tabla
 estilo_tabla = TableStyle([
-    ("BACKGROUND", (0, 0), (-1, 0), colors.gray),
+    ("BACKGROUND", (0, 0), (-1, 0), colors.chocolate),
     ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
-    ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+    ("ALIGN", (0, 0), (-1, -1), "LEFT"),
     ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
     ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
     ("BOTTOMPADDING", (0, 0), (-1, 0), 8),
@@ -118,11 +126,11 @@ for lista1, lista2, lista3, headers in grupos1:
     contenido.append(tabla)
     contenido.append(Spacer(1,15))
 
-for lista1, lista2, lista3, lista4, lista5, headers in grupos2:
+for lista1, lista2, lista3, lista4, lista5, lista6, lista7, lista8, lista9, headers in grupos2:
     #crear tabla
     data = [headers]
     for i in range(len(lista1)):
-        data.append([lista1[i], lista2[i], lista3[i], lista4[i], lista5[i]])
+        data.append([lista1[i], lista2[i], lista3[i], lista4[i], lista5[i], lista6[i], lista7[i], lista8[i], lista9[i],])
 
     tabla = Table(data)
     tabla.setStyle(estilo_tabla)
