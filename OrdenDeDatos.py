@@ -2,6 +2,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
+from datetime import datetime
 
 system_meters_tx16 = ['3.510 V', '3.509 V', '3.385 V', '0.267 V', '3.502 V']
 system_meters_tx17 = ['3.512 V', '3.508 V', '3.380 V', '0.257 V', '3.509 V']
@@ -34,7 +35,7 @@ for cont, lista in enumerate(tx16PowerAmpsList):
         if (idx - cont) % 5 == 0:
             lista.append(valor)
     cont +=1
-    print(lista)
+    #print(lista)
 
 power_amps_tx17PA = []
 power_amps_tx17_power = []
@@ -48,7 +49,7 @@ for cont, lista in enumerate(tx17PowerAmpsList):
         if (idx - cont) % 5 == 0:
             lista.append(valor)
     cont +=1
-    print(lista)
+    #print(lista)
 
 system_meters_list = [
     'Power Ctrl Ref',
@@ -98,14 +99,17 @@ grupos2 = [
      ['Power \nAmps','PWR OUT%','VOLTS','AMPS','TEMP °C','PWR OUT%','VOLTS','AMPS','TEMP °C']),
 ]
 
+fecha= datetime.now()
+fecha_archivo = 'Reporte de rutina de inspección diaria San Cristóbal {}-{}-{}.pdf'.format(fecha.day, fecha.month, fecha.year)
+
 #Creacion de PDF
-pdf = SimpleDocTemplate('reporte_mediciones.pdf', pagesize=letter)
+pdf = SimpleDocTemplate(fecha_archivo, pagesize=letter)
 estilos = getSampleStyleSheet()
 contenido = []
 
 # Estilo de tabla
 estilo_tabla = TableStyle([
-    ("BACKGROUND", (0, 0), (-1, 0), colors.chocolate),
+    ("BACKGROUND", (0, 0), (-1, 0), colors.blue),
     ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
     ("ALIGN", (0, 0), (-1, -1), "LEFT"),
     ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
@@ -141,4 +145,4 @@ for lista1, lista2, lista3, lista4, lista5, lista6, lista7, lista8, lista9, head
 
 #Generar PDF
 pdf.build(contenido)
-print("PDF generado correctamente: reporte_mediciones.pdf")
+print("PDF generado correctamente: {}".format(fecha_archivo))
