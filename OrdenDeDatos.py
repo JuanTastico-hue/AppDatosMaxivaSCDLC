@@ -164,7 +164,7 @@ for lista1, lista2, lista3, headers in grupos1:
 
 #Tablas encabezado de Power Amps Ch16 y Ch17
 encabezado_power_amps = [
-    ['Power Amps','Canal16','','','','Canal 17','','',''],
+    ['Power  Amps','Canal16','','','','Canal 17','','',''],
     ['','PWR OUT%','VOLTS','AMPS','TEMP °C','PWR OUT%','VOLTS','AMPS','TEMP °C']
 ]
 
