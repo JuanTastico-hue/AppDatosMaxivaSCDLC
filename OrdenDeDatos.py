@@ -124,7 +124,7 @@ estilo_encabezado_power_amps = TableStyle([
 
 # Estilo de unicamente datos de power amps
 estilo_datos_power_amps = TableStyle([
-    ("ALIGN", (0, 0), (-1, -1), "RIGHT"),
+    ("ALIGN", (0, 0), (-1, -1), "CENTER"),
     ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
 ])
 
@@ -164,24 +164,18 @@ for lista1, lista2, lista3, headers in grupos1:
 
 #Tablas encabezado de Power Amps Ch16 y Ch17
 encabezado_power_amps = [
-    ['Power  Amps','Canal16','','','','Canal 17','','',''],
+    ['Power \nAmps','Canal16','','','','Canal 17','','',''],
     ['','PWR OUT%','VOLTS','AMPS','TEMP °C','PWR OUT%','VOLTS','AMPS','TEMP °C']
 ]
 
-tabla = Table(encabezado_power_amps)
-tabla.setStyle(estilo_encabezado_power_amps)
-
-# agregar tabla y espacio
-contenido.append(tabla)
-contenido.append(Spacer(1, 15))
-
 for lista1, lista2, lista3, lista4, lista5, lista6, lista7, lista8, lista9 in grupos2:
     #crear tabla
-    data = []
+    data = encabezado_power_amps.copy()
     for i in range(len(lista1)):
         data.append([lista1[i], lista2[i], lista3[i], lista4[i], lista5[i], lista6[i], lista7[i], lista8[i], lista9[i],])
 
     tabla = Table(data)
+    tabla.setStyle(estilo_encabezado_power_amps)
     tabla.setStyle(estilo_datos_power_amps)
 
     #agregar tabla y espacio
