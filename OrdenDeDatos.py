@@ -44,7 +44,6 @@ for cont, lista in enumerate(tx16PowerAmpsList):
         if (idx - cont) % 5 == 0:
             lista.append(valor)
     cont +=1
-    #print(lista)
 
 power_amps_tx17PA = []
 power_amps_tx17_power = []
@@ -58,7 +57,6 @@ for cont, lista in enumerate(tx17PowerAmpsList):
         if (idx - cont) % 5 == 0:
             lista.append(valor)
     cont +=1
-    #print(lista)
 
 system_meters_list = [
     'Power Ctrl Ref',
@@ -79,15 +77,6 @@ system_cooling_list = [
     'Inlet Press',
     'Oulet Press',
     'Air Temp-Front']
-#
-#    POWER AMPS:
-#        #####   PWR OUT%    VOLTS   AMPS    TEMP°C
-#          PA1
-#          PA2
-#          PA3
-#          PA4
-#          PA5
-#          PA6
 
 grupos1 = [
     (system_meters_list, system_meters_tx16, system_meters_tx17,['System meters','Canal 16', 'Canal 17']),
