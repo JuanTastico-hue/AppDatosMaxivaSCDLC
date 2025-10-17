@@ -56,35 +56,20 @@ system_cooling_list = [
     'Oulet Press',
     'Air Temp-Front']
 
-#Listas donde se guardarán de manera correcta los datos del transmisor CH16 y 17
-    ### CH16
+#Listas donde se guardarán de manera correcta los datos del transmisor CH16
 power_amps_tx16PA = []
 power_amps_tx16_power = []
 power_amps_tx16V = []
 power_amps_tx16A = []
 power_amps_tx16C = []
 tx16PowerAmpsList = [power_amps_tx16PA,power_amps_tx16_power,power_amps_tx16V,power_amps_tx16A,power_amps_tx16C]
-    ###CH17
+# Listas donde se guardarán de manera correcta los datos del transmisor CH17
 power_amps_tx17PA = []
 power_amps_tx17_power = []
 power_amps_tx17V = []
 power_amps_tx17A = []
 power_amps_tx17C = []
 tx17PowerAmpsList = [power_amps_tx17PA,power_amps_tx17_power,power_amps_tx17V,power_amps_tx17A,power_amps_tx17C]
-
-#Ciclos que guardan correctamente los datos de las listas de power amps CH16 y CH17
-    ###CH16
-for cont, lista in enumerate(tx16PowerAmpsList):
-    for idx, valor in enumerate(power_amps_tx16):
-        if (idx - cont) % 5 == 0:
-            lista.append(valor)
-    cont +=1
-    ###CH17
-for cont, lista in enumerate(tx17PowerAmpsList):
-    for idx, valor in enumerate(power_amps_tx17):
-        if (idx - cont) % 5 == 0:
-            lista.append(valor)
-    cont +=1
 
 #Variable que almacena la manera de mostrar las tablas de los datos de System meters, Drive chain y System coolin
 grupos1 = [
@@ -93,7 +78,7 @@ grupos1 = [
     (system_cooling_list, system_cooling_tx16, system_cooling_tx17, ['System cooling','Canal 16', 'Canal 17']),
     ]
 
-#Variable que almacena la manera de morar las tablas de los datos de Power Amps
+#Variable que almacena la manera de mostrar las tablas de los datos de Power Amps
 grupos2 = [
     (power_amps_tx16PA,
      power_amps_tx16_power,
@@ -106,17 +91,8 @@ grupos2 = [
      power_amps_tx17C),
     ]
 
-#Almacenamiento de la fecha como variable para asignación del nombre del archivo según la fecha
-fecha= datetime.now()
-fecha_archivo = 'Reporte de rutina de inspección diaria San Cristóbal {}-{}-{}.pdf'.format(fecha.day, fecha.month, fecha.year)
-
-#Creacion de PDF
-pdf = SimpleDocTemplate(fecha_archivo, pagesize=letter)
-estilos = getSampleStyleSheet()
-contenido = []
-
-# Estilo de tabla
-estilo_tabla = TableStyle([
+# Style de tablas System meters, Drive chain y System cooling
+estilos_tablas_SDC = TableStyle([
     ("BACKGROUND", (0, 0), (-1, 0), colors.blue),
     ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
     ("ALIGN", (0, 0), (-1, -1), "RIGHT"),
@@ -125,27 +101,8 @@ estilo_tabla = TableStyle([
     ("BOTTOMPADDING", (0, 0), (-1, 0), 8),
 ])
 
-#Tablas de System meters, Drive chain y cooling
-for lista1, lista2, lista3, headers in grupos1:
-    #crear tabla
-    data = [headers]
-    for i in range(len(lista1)):
-        data.append([lista1[i], lista2[i], lista3[i]])
-
-    tabla = Table(data)
-    tabla.setStyle(estilo_tabla)
-
-    #Agregar tabla y espacio
-    contenido.append(tabla)
-    contenido.append(Spacer(1,15))
-
-#Tablas de Power Amps Ch16 y Ch17
-encabezado = [
-    ['Power \nAmps','Canal16','','','','Canal 17','','',''],
-    ['','PWR OUT%','VOLTS','AMPS','TEMP °C','PWR OUT%','VOLTS','AMPS','TEMP °C']
-]
-
-estilo_power_amps = TableStyle([
+# Style de tablas de encabezado de Power Amps
+estilo_encabezado_power_amps = TableStyle([
     ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
     ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
     ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -165,8 +122,54 @@ estilo_power_amps = TableStyle([
     ('FONTSIZE', (0, 0), (-1, -1), 9),
 ])
 
-tabla = Table(encabezado)
-tabla.setStyle(estilo_power_amps)
+# Estilo de unicamente datos de power amps
+estilo_datos_power_amps = TableStyle([
+    ("ALIGN", (0, 0), (-1, -1), "RIGHT"),
+    ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
+])
+
+#Ciclos que guardan correctamente los datos de las listas de power amps CH16
+for cont, lista in enumerate(tx16PowerAmpsList):
+    for idx, valor in enumerate(power_amps_tx16):
+        if (idx - cont) % 5 == 0:
+            lista.append(valor)
+#Ciclos que guardan correctamente los datos de las listas de power amps CH17
+for cont, lista in enumerate(tx17PowerAmpsList):
+    for idx, valor in enumerate(power_amps_tx17):
+        if (idx - cont) % 5 == 0:
+            lista.append(valor)
+
+#Almacenamiento de la fecha como variable para asignación del nombre del archivo según la fecha
+fecha= datetime.now()
+fecha_archivo = 'Reporte de rutina de inspeccion diaria San Cristobal {}-{}-{}.pdf'.format(fecha.day, fecha.month, fecha.year)
+
+#Creacion de PDF
+pdf = SimpleDocTemplate(fecha_archivo, pagesize=letter)
+estilos = getSampleStyleSheet()
+contenido = []
+
+#Tablas de System meters, Drive chain y Cooling
+for lista1, lista2, lista3, headers in grupos1:
+    #crear tabla
+    data = [headers]
+    for i in range(len(lista1)):
+        data.append([lista1[i], lista2[i], lista3[i]])
+
+    tabla = Table(data)
+    tabla.setStyle(estilos_tablas_SDC)
+
+    #Agregar tabla y espacio
+    contenido.append(tabla)
+    contenido.append(Spacer(1,15))
+
+#Tablas encabezado de Power Amps Ch16 y Ch17
+encabezado_power_amps = [
+    ['Power Amps','Canal16','','','','Canal 17','','',''],
+    ['','PWR OUT%','VOLTS','AMPS','TEMP °C','PWR OUT%','VOLTS','AMPS','TEMP °C']
+]
+
+tabla = Table(encabezado_power_amps)
+tabla.setStyle(estilo_encabezado_power_amps)
 
 # agregar tabla y espacio
 contenido.append(tabla)
@@ -179,7 +182,7 @@ for lista1, lista2, lista3, lista4, lista5, lista6, lista7, lista8, lista9 in gr
         data.append([lista1[i], lista2[i], lista3[i], lista4[i], lista5[i], lista6[i], lista7[i], lista8[i], lista9[i],])
 
     tabla = Table(data)
-    tabla.setStyle(estilo_tabla)
+    tabla.setStyle(estilo_datos_power_amps)
 
     #agregar tabla y espacio
     contenido.append(tabla)
