@@ -120,12 +120,13 @@ contenido = []
 estilo_tabla = TableStyle([
     ("BACKGROUND", (0, 0), (-1, 0), colors.blue),
     ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
-    ("ALIGN", (0, 0), (-1, -1), "LEFT"),
+    ("ALIGN", (0, 0), (-1, -1), "RIGHT"),
     ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
     ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
     ("BOTTOMPADDING", (0, 0), (-1, 0), 8),
 ])
 
+#Tablas de System meters, Drive chain y cooling
 for lista1, lista2, lista3, headers in grupos1:
     #crear tabla
     data = [headers]
@@ -138,6 +139,33 @@ for lista1, lista2, lista3, headers in grupos1:
     #Agregar tabla y espacio
     contenido.append(tabla)
     contenido.append(Spacer(1,15))
+
+#Tablas de Power Amps Ch16 y Ch17
+encabezado = [
+    ['Power \nAmps','Canal16','','','','Canal 17','','',''],
+    ['','PWR OUT%','VOLTS','AMPS','TEMP °C','PWR OUT%','VOLTS','AMPS','TEMP °C']
+]
+
+t=Table(encabezado,style=[
+    ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+    ('BACKGROUND', (0, 0), (1, 1), colors.palegreen),
+    ("VALIGN", (0, 0), (-1, -1), "CENTER"),
+    ('SPAN', (0, 0), (0, 1)),
+    ('NOSPLIT', (0, 0), (0, 1)),
+    ('BACKGROUND', (-2, -2), (-1, -1), colors.pink),
+    ('SPAN', (1, 0), (4, 0)),
+    ('NOSPLIT', (1, 0), (4, 1)),
+    ('BACKGROUND', (-2, -2), (-1, -1), colors.pink),
+    ('SPAN', (5, 0), (8, 0)),
+    ('NOSPLIT', (5, 0), (8, 1)),
+])
+
+tabla = Table(encabezado)
+#tabla.setStyle(estilo_tabla)
+
+# agregar tabla y espacio
+contenido.append(tabla)
+contenido.append(Spacer(1, 15))
 
 for lista1, lista2, lista3, lista4, lista5, lista6, lista7, lista8, lista9, headers in grupos2:
     #crear tabla
