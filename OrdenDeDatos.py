@@ -124,6 +124,7 @@ estilo_encabezado_power_amps = TableStyle([
 
 # Estilo de unicamente datos de power amps
 estilo_datos_power_amps = TableStyle([
+    ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
     ("ALIGN", (0, 0), (-1, -1), "CENTER"),
     ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
 ])
