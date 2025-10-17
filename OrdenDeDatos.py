@@ -13,6 +13,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 from datetime import datetime
 
+#listas de datos de prueba
 system_meters_tx16 = ['3.510 V', '3.509 V', '3.385 V', '0.267 V', '3.502 V']
 system_meters_tx17 = ['3.512 V', '3.508 V', '3.380 V', '0.257 V', '3.509 V']
 drive_chain_tx_16 = ['113.2%', '100.9%', '49.5V', '19.6A']
@@ -32,34 +33,7 @@ power_amps_tx17 = ['PA 1:', '99.3 %', '47.5 V', '23.9 A', '40.4 C',
                    'PA 5:', '99.8 %', '47.4 V', '19.4 A', '37.3 C',
                    'PA 6:', '104.7 %', '47.4 V', '20.4 A', '38.2 C']
 
-power_amps_tx16PA = []
-power_amps_tx16_power = []
-power_amps_tx16V = []
-power_amps_tx16A = []
-power_amps_tx16C = []
-tx16PowerAmpsList = [power_amps_tx16PA,power_amps_tx16_power,power_amps_tx16V,power_amps_tx16A,power_amps_tx16C]
-
-for cont, lista in enumerate(tx16PowerAmpsList):
-    for idx, valor in enumerate(power_amps_tx16):
-        if (idx - cont) % 5 == 0:
-            lista.append(valor)
-    cont +=1
-    #print(lista)
-
-power_amps_tx17PA = []
-power_amps_tx17_power = []
-power_amps_tx17V = []
-power_amps_tx17A = []
-power_amps_tx17C = []
-tx17PowerAmpsList = [power_amps_tx17PA,power_amps_tx17_power,power_amps_tx17V,power_amps_tx17A,power_amps_tx17C]
-
-for cont, lista in enumerate(tx17PowerAmpsList):
-    for idx, valor in enumerate(power_amps_tx17):
-        if (idx - cont) % 5 == 0:
-            lista.append(valor)
-    cont +=1
-    #print(lista)
-
+#Encabezados SYSTEM METERS de las tablas en pdf
 system_meters_list = [
     'Power Ctrl Ref',
     'APC Reference',
@@ -67,34 +41,59 @@ system_meters_list = [
     'Foldback Level',
     'Fordward Sample']
 
+#Encabezados DRIVE CHAIN de las tablas en pdf
 drive_chain_list = [
     'Module RF Out',
     'Module Input',
     'Input Voltage',
     'Total Current']
 
+#Encabezados SYSTEM cooling de las tablas en pdf
 system_cooling_list = [
     'Coolant Temp',
     'Flow Rate',
     'Inlet Press',
     'Oulet Press',
     'Air Temp-Front']
-#
-#    POWER AMPS:
-#        #####   PWR OUT%    VOLTS   AMPS    TEMP°C
-#          PA1
-#          PA2
-#          PA3
-#          PA4
-#          PA5
-#          PA6
 
+#Listas donde se guardarán de manera correcta los datos del transmisor CH16 y 17
+    ### CH16
+power_amps_tx16PA = []
+power_amps_tx16_power = []
+power_amps_tx16V = []
+power_amps_tx16A = []
+power_amps_tx16C = []
+tx16PowerAmpsList = [power_amps_tx16PA,power_amps_tx16_power,power_amps_tx16V,power_amps_tx16A,power_amps_tx16C]
+    ###CH17
+power_amps_tx17PA = []
+power_amps_tx17_power = []
+power_amps_tx17V = []
+power_amps_tx17A = []
+power_amps_tx17C = []
+tx17PowerAmpsList = [power_amps_tx17PA,power_amps_tx17_power,power_amps_tx17V,power_amps_tx17A,power_amps_tx17C]
+
+#Ciclos que guardan correctamente los datos de las listas de power amps CH16 y CH17
+    ###CH16
+for cont, lista in enumerate(tx16PowerAmpsList):
+    for idx, valor in enumerate(power_amps_tx16):
+        if (idx - cont) % 5 == 0:
+            lista.append(valor)
+    cont +=1
+    ###CH17
+for cont, lista in enumerate(tx17PowerAmpsList):
+    for idx, valor in enumerate(power_amps_tx17):
+        if (idx - cont) % 5 == 0:
+            lista.append(valor)
+    cont +=1
+
+#Variable que almacena la manera de mostrar las tablas de los datos de System meters, Drive chain y System coolin
 grupos1 = [
     (system_meters_list, system_meters_tx16, system_meters_tx17,['System meters','Canal 16', 'Canal 17']),
     (drive_chain_list, drive_chain_tx_16, drive_chain_tx_17, ['Drive chain','Canal 16', 'Canal 17']),
     (system_cooling_list, system_cooling_tx16, system_cooling_tx17, ['System cooling','Canal 16', 'Canal 17']),
     ]
 
+#Variable que almacena la manera de morar las tablas de los datos de Power Amps
 grupos2 = [
     (power_amps_tx16PA,
      power_amps_tx16_power,
@@ -104,10 +103,10 @@ grupos2 = [
      power_amps_tx17_power,
      power_amps_tx17V,
      power_amps_tx17A,
-     power_amps_tx17C,
-     ['Power \nAmps','PWR OUT%','VOLTS','AMPS','TEMP °C','PWR OUT%','VOLTS','AMPS','TEMP °C']),
-]
+     power_amps_tx17C),
+    ]
 
+#Almacenamiento de la fecha como variable para asignación del nombre del archivo según la fecha
 fecha= datetime.now()
 fecha_archivo = 'Reporte de rutina de inspección diaria San Cristóbal {}-{}-{}.pdf'.format(fecha.day, fecha.month, fecha.year)
 
@@ -146,30 +145,36 @@ encabezado = [
     ['','PWR OUT%','VOLTS','AMPS','TEMP °C','PWR OUT%','VOLTS','AMPS','TEMP °C']
 ]
 
-t=Table(encabezado,style=[
+estilo_power_amps = TableStyle([
     ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
-    ('BACKGROUND', (0, 0), (1, 1), colors.palegreen),
-    ("VALIGN", (0, 0), (-1, -1), "CENTER"),
-    ('SPAN', (0, 0), (0, 1)),
-    ('NOSPLIT', (0, 0), (0, 1)),
-    ('BACKGROUND', (-2, -2), (-1, -1), colors.pink),
-    ('SPAN', (1, 0), (4, 0)),
-    ('NOSPLIT', (1, 0), (4, 1)),
-    ('BACKGROUND', (-2, -2), (-1, -1), colors.pink),
-    ('SPAN', (5, 0), (8, 0)),
-    ('NOSPLIT', (5, 0), (8, 1)),
+    ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+    ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+
+    # Fondos por secciones
+    ('BACKGROUND', (0, 0), (0, 1), colors.palegreen),  # Power Amps
+    ('BACKGROUND', (1, 0), (4, 0), colors.lightblue),  # Canal 16
+    ('BACKGROUND', (5, 0), (8, 0), colors.pink),       # Canal 17
+
+    # Fusión de celdas (span)
+    ('SPAN', (0, 0), (0, 1)),  # Power Amps
+    ('SPAN', (1, 0), (4, 0)),  # Canal 16
+    ('SPAN', (5, 0), (8, 0)),  # Canal 17
+
+    # Fuente
+    ('FONTNAME', (0, 0), (-1, -1), 'Helvetica-Bold'),
+    ('FONTSIZE', (0, 0), (-1, -1), 9),
 ])
 
 tabla = Table(encabezado)
-#tabla.setStyle(estilo_tabla)
+tabla.setStyle(estilo_power_amps)
 
 # agregar tabla y espacio
 contenido.append(tabla)
 contenido.append(Spacer(1, 15))
 
-for lista1, lista2, lista3, lista4, lista5, lista6, lista7, lista8, lista9, headers in grupos2:
+for lista1, lista2, lista3, lista4, lista5, lista6, lista7, lista8, lista9 in grupos2:
     #crear tabla
-    data = [headers]
+    data = []
     for i in range(len(lista1)):
         data.append([lista1[i], lista2[i], lista3[i], lista4[i], lista5[i], lista6[i], lista7[i], lista8[i], lista9[i],])
 
