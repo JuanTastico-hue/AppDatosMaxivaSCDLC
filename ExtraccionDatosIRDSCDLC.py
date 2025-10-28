@@ -10,10 +10,10 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 #from webdriver_manager.chrome import ChromeDriverManager
-#from selenium.webdriver.common.by import By
-#from selenium.webdriver.support.ui import WebDriverWait
-#from selenium.webdriver.support import expected_conditions as ec
-import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
+#import time
 
 lista_ip_ird = [
     'http://10.20.39.211/advanced',             #IRD Main Red 2 SCDLC
@@ -33,6 +33,10 @@ driver.maximize_window()
 
 for i in lista_ip_ird:
     driver.get(i)
-    time.sleep(4)
+    driver.switch_to.frame("mainFrame")
+    boton_input = WebDriverWait(driver, 15).until(
+        ec.presence_of_element_located((By.XPATH, "//p[@class='nText'][normalize-space()='Input']"))
+    )
+    boton_input.click()
 
 driver.quit()
