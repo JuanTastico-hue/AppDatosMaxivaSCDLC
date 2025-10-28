@@ -38,5 +38,9 @@ for i in lista_ip_ird:
         ec.presence_of_element_located((By.XPATH, "//p[@class='nText'][normalize-space()='Input']"))
     )
     boton_input.click()
+    boton_satellite_input = WebDriverWait(driver, 15).until(
+        ec.presence_of_element_located((By.XPATH, "//table[@id='SAT Input']"))
+    )
+    boton_satellite_input.click()
 
 driver.quit()
