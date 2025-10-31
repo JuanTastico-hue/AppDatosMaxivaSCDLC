@@ -23,7 +23,7 @@ def obtener_textos(by, selector, timeout=50):
     clases = WebDriverWait(driver, timeout).until(ec.presence_of_all_elements_located((by, selector)))
     return [elemento.text for elemento in clases]
 
-def recoleccion_datos():
+def recoleccion_datos_maxiva():
     #SYSTEM METERS
     boton_system = driver.find_element(By.XPATH, "//a[@id='menuBtn5']")
     boton_system.click()
@@ -139,9 +139,9 @@ driver = webdriver.Chrome(service=service)
 driver.maximize_window()
 driver.get("http://110.10.10.16/xt/html/index.html")
 time.sleep(4)
-recoleccion_datos()
+recoleccion_datos_maxiva()
 
 driver.get("http://110.10.10.17/xt/html/index.html")
 time.sleep(4)
-recoleccion_datos()
+recoleccion_datos_maxiva()
 driver.quit()
